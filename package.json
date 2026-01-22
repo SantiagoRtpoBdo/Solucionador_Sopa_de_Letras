@@ -1,0 +1,27 @@
+{
+  "name": "solucionador-sopa-de-letras",
+  "version": "1.0.0",
+  "description": "Aplicación web para resolver sopas de letras con diseño moderno",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "word-search",
+    "puzzle",
+    "solver"
+  ],
+  "author": "Santiago",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "lucide": "^0.562.0"
+  }
+}

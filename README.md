@@ -5,9 +5,8 @@ Aplicación web para resolver sopas de letras, detectando palabras en todas las 
 ## Tecnologías utilizadas
 
 - HTML5
-- CSS3 (estilos simples, sin frameworks)
-- JavaScript Vanilla (sin librerías externas)
-- Live Server para desarrollo local (extensión de VS Code)
+- CSS3 
+- JavaScript
 
 ## Recursos especiales
 
@@ -19,15 +18,10 @@ Aplicación web para resolver sopas de letras, detectando palabras en todas las 
 ## Cómo desplegar / probar localmente
 
 1. Clona este repositorio o descarga los archivos.
-2. Abre `index.html` con **Live Server** desde VS Code.
+2. npm i y luego npm run dev
 3. Ingresa la matriz (una línea por fila, letras separadas por comas).
 4. Ingresa las palabras a buscar (una por línea).
-5. Haz clic en **Buscar Palabras** para ver los resultados.
-6. Usa el botón **Mostrar sopa de letras** para ver visualmente las palabras resaltadas.
-
-## Nota: importante
-
-Si no tienes Live Server, puedes instalarlo desde la extensión de VS Code: "Live Server" de Ritwick Dey.
+5. Haz clic en **Buscar** para ver los resultados.
 
 ## Ejemplo para probar
 
@@ -69,7 +63,7 @@ NUTRIA
 ## Archivos principales
 
 - `index.html` – estructura del sitio
-- `style.css` – estilos básicos
+- `style.css` – estilos
 - `script.js` – lógica de búsqueda
 
 ## Autor

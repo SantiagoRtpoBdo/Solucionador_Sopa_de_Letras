@@ -1,82 +1,232 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!doctype html>
+<html lang="es">
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>SantiDev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solucionador de Sopa de Letras - SantiDev</title>
     <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1>🔍 Solucionador de Sopa de Letras</h1>
-            <p>Encuentra palabras en horizontal, vertical y diagonal</p>
-        </header>
+  </head>
+  <body
+    class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen flex flex-col"
+  >
+    <!-- Header -->
+    <header class="bg-white shadow-md border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center gap-4">
+          <div
+            class="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-xl shadow-lg"
+          >
+            <i data-lucide="search" class="w-8 h-8 text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900">
+              Solucionador de Sopa de Letras
+            </h1>
+            <p class="text-gray-600 mt-1">
+              Encuentra palabras en horizontal, vertical y diagonal
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
 
-        <main>
-            <form id="wordSearchForm">
-                <div>
-                    <div>
-                        <label for="matrix">📋 Matriz (separada por comas):</label>
-                        <textarea id="matrix" rows="12" required placeholder="N,D,E,K,I,C,A,N,G,U,R,O,G,E&#10;S,X,R,Y,K,V,I,I,Q,G,W,Q,O,D&#10;..."></textarea>
-                        <small>Ingresa cada fila en una línea nueva</small>
-                    </div>
-                    <div>
-                        <label for="words">📝 Palabras a buscar:</label>
-                        <textarea id="words" rows="12" required placeholder="GATO&#10;PERRO&#10;LEON&#10;..."></textarea>
-                        <small>Una palabra por línea</small>
-                    </div>
-                </div>
-
-                <div>
-                    <button type="submit">
-                        <span>🔍</span> Buscar Palabras
-                    </button>
-                    <button type="button" id="clearBtn">
-                        <span>🗑️</span> Limpiar
-                    </button>
-                    <button type="button" id="showMatrixBtn" class="hidden">
-                        <span>🎯</span> Mostrar sopa de letras
-                    </button>
-                </div>
-            </form>
-
-            <div id="results" class="hidden">
-                <div>
-                    <h2>📊 Resultados de la Búsqueda</h2>
-                    <div>
-                        <span>
-                            <span id="foundCount">0</span>
-                            <span>Encontradas</span>
-                        </span>
-                        <span>
-                            <span id="notFoundCount">0</span>
-                            <span>No Encontradas</span>
-                        </span>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <h3>✅ Palabras Encontradas</h3>
-                        <ul id="foundList"></ul>
-                    </div>
-                    <div>
-                        <h3>❌ Palabras No Encontradas</h3>
-                        <ul id="notFoundList"></ul>
-                    </div>
-                </div>
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
+      <!-- Input Section -->
+      <div
+        class="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 mb-8 animate-fade-in"
+      >
+        <form id="wordSearchForm">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+            <!-- Matriz Input -->
+            <div class="space-y-2">
+              <label
+                for="matrix"
+                class="flex items-center gap-2 text-base font-semibold text-gray-800"
+              >
+                <i data-lucide="grid-3x3" class="w-5 h-5 text-blue-600"></i>
+                Matriz (separada por comas)
+              </label>
+              <textarea
+                id="matrix"
+                rows="8"
+                required
+                class="w-full font-mono text-sm px-4 py-2 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 resize-none bg-gray-50"
+                placeholder="N,D,E,K,I,C,A,N,G,U,R,O,G,E&#10;S,X,R,Y,K,V,I,I,Q,G,W,Q,O,D&#10;..."
+              ></textarea>
+              <small class="flex items-center gap-1 text-gray-500">
+                <i data-lucide="info" class="w-4 h-4"></i>
+                Ingresa cada fila en una línea nueva
+              </small>
             </div>
 
-            <div id="matrixDisplay" class="hidden">
-                <h2>🎯 Sopa de Letras</h2>
-                <div id="matrixGrid"></div>
+            <!-- Palabras Input -->
+            <div class="space-y-2">
+              <label
+                for="words"
+                class="flex items-center gap-2 text-base font-semibold text-gray-800"
+              >
+                <i data-lucide="list" class="w-5 h-5 text-blue-600"></i>
+                Palabras a buscar
+              </label>
+              <textarea
+                id="words"
+                rows="8"
+                required
+                class="w-full font-mono text-sm px-4 py-2 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 resize-none bg-gray-50"
+                placeholder="GATO&#10;PERRO&#10;LEON&#10;..."
+              ></textarea>
+              <small class="flex items-center gap-1 text-gray-500">
+                <i data-lucide="info" class="w-4 h-4"></i>
+                Una palabra por línea
+              </small>
             </div>
-        </main>
-        <footer class="footer">
-            <p></p>
-        </footer>
-    </div>
+          </div>
 
-    <script src="script.js"></script>
-</body>
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-4 justify-center">
+            <div class="w-full max-w-xs flex justify-between">
+              <button
+                type="submit"
+                class="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-blue-300"
+              >
+                <i data-lucide="search" class="w-5 h-5"></i>
+                Buscar
+              </button>
+              <button
+                type="button"
+                id="clearBtn"
+                class="flex items-center gap-2 px-6 py-2 bg-white text-gray-700 font-semibold rounded-xl shadow-md border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400 transform hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-gray-200"
+              >
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+                Limpiar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Results Section (Grid Layout: Matrix Left, Results Right) -->
+      <div id="resultsContainer" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Matrix Display (Left) -->
+          <div
+            id="matrixDisplay"
+            class="bg-white rounded-2xl shadow-xl border border-gray-200 p-4 animate-slide-up"
+          >
+            <div class="flex items-center gap-3 mb-6">
+              <div
+                class="bg-gradient-to-br from-purple-500 to-pink-600 p-2 rounded-lg"
+              >
+                <i data-lucide="grid-2x2" class="w-6 h-6 text-white"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-gray-900">Sopa de Letras</h2>
+            </div>
+            <div
+              class="overflow-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+            >
+              <div id="matrixGrid" class="inline-block"></div>
+            </div>
+          </div>
+
+          <!-- Results Display (Right) -->
+          <div id="results" class="space-y-6 animate-slide-up">
+            <!-- Stats -->
+            <div
+              class="bg-white rounded-2xl shadow-xl border border-gray-200 p-4"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <div
+                  class="bg-gradient-to-br from-green-500 to-teal-600 p-2 rounded-lg"
+                >
+                  <i data-lucide="bar-chart-3" class="w-6 h-6 text-white"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">Resultados</h2>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div
+                  class="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200"
+                >
+                  <div class="flex items-center gap-2 mb-1">
+                    <i
+                      data-lucide="check-circle"
+                      class="w-5 h-5 text-green-600"
+                    ></i>
+                    <span class="text-sm font-medium text-green-700"
+                      >Encontradas</span
+                    >
+                  </div>
+                  <span
+                    id="foundCount"
+                    class="text-3xl font-bold text-green-600"
+                    >0</span
+                  >
+                </div>
+                <div
+                  class="bg-gradient-to-br from-red-50 to-rose-50 p-4 rounded-xl border border-red-200"
+                >
+                  <div class="flex items-center gap-2 mb-1">
+                    <i data-lucide="x-circle" class="w-5 h-5 text-red-600"></i>
+                    <span class="text-sm font-medium text-red-700"
+                      >No Encontradas</span
+                    >
+                  </div>
+                  <span
+                    id="notFoundCount"
+                    class="text-3xl font-bold text-red-600"
+                    >0</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Found Words -->
+            <div
+              class="bg-white rounded-2xl shadow-xl border border-gray-200 p-4"
+            >
+              <h3
+                class="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4"
+              >
+                <i
+                  data-lucide="check-circle-2"
+                  class="w-6 h-6 text-green-600"
+                ></i>
+                Palabras Encontradas
+              </h3>
+              <div
+                id="foundList"
+                class="flex flex-wrap gap-2 min-h-[50px]"
+              ></div>
+            </div>
+
+            <!-- Not Found Words -->
+            <div
+              class="bg-white rounded-2xl shadow-xl border border-gray-200 p-4"
+            >
+              <h3
+                class="flex items-center gap-2 text-xl font-bold text-gray-900 mb-4"
+              >
+                <i data-lucide="x-circle" class="w-6 h-6 text-red-600"></i>
+                Palabras No Encontradas
+              </h3>
+              <div
+                id="notFoundList"
+                class="flex flex-wrap gap-2 min-h-[50px]"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-auto py-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-gray-600 flex items-center justify-center gap-2">
+          © <span id="currentYear">2026</span> SantiDev Development with ❤️.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.562.0/dist/lucide.iife.min.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
